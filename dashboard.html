@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Result Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<h1>Result Analysis Dashboard</h1>
+
+<h2>Overview</h2>
+<p>Total Students: {{ data.total }}</p>
+<p>Passed: {{ data.passed }}</p>
+<p>Failed: {{ data.failed }}</p>
+<p>Class Average: {{ data.average }}</p>
+
+<h2>Category Wise Result</h2>
+<ul>
+    <li>Distinction: {{ data.distinction }}</li>
+    <li>First Class: {{ data.first_class }}</li>
+    <li>Second Class: {{ data.second_class }}</li>
+    <li>Third Class: {{ data.third_class }}</li>
+    <li>Fail: {{ data.fail }}</li>
+</ul>
+
+<h2>Caste Wise Result</h2>
+<table border="1">
+<tr>
+    <th>Caste</th>
+    <th>Total</th>
+    <th>Passed</th>
+    <th>Failed</th>
+    <th>Pass %</th>
+</tr>
+
+{% for row in data.caste_data %}
+<tr>
+    <td>{{ row.Caste }}</td>
+    <td>{{ row.Total }}</td>
+    <td>{{ row.Passed }}</td>
+    <td>{{ row.Failed }}</td>
+    <td>{{ row['Pass %'] }}</td>
+</tr>
+{% endfor %}
+
+</table>
+
+<h2>Top 5 Students</h2>
+<table border="1">
+<tr>
+    <th>Name</th>
+    <th>Marks</th>
+</tr>
+
+{% for student in data.top_students %}
+<tr>
+    <td>{{ student.Name }}</td>
+    <td>{{ student.Marks }}</td>
+</tr>
+{% endfor %}
+
+</table>
+
+<h2>All Student Results</h2>
+<table border="1">
+<tr>
+    <th>RollNo</th>
+    <th>Name</th>
+    <th>Marks</th>
+    <th>Caste</th>
+    <th>Result</th>
+</tr>
+
+{% for student in data.all_students %}
+<tr>
+    <td>{{ student.RollNo }}</td>
+    <td>{{ student.Name }}</td>
+    <td>{{ student.Marks }}</td>
+    <td>{{ student.Caste }}</td>
+    <td>{{ student.Result }}</td>
+</tr>
+{% endfor %}
+
+</table>
+
+</body>
+</html>
